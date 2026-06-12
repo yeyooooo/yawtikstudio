@@ -1,0 +1,2028 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Yawtik Studio convierte presencia digital, CRM, contenido y pauta en un sistema de ventas para empresas B2B."
+    >
+    <title>Yawtik Studio | Sistema de ventas digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/yawtik-butterfly-blue.png">
+    <style>
+      :root {
+        --bg: #f6f6f1;
+        --paper: #ffffff;
+        --ink: #11130f;
+        --muted: #6d7068;
+        --line: #d9dcd2;
+        --blue: #073cff;
+        --blue-soft: #dfe7ff;
+        --accent: #073cff;
+        --dark-blue: #021b83;
+        --mx: 0;
+        --my: 0;
+        --lens-x: 50%;
+        --lens-y: 50%;
+        --blob-1x: 24%;
+        --blob-1y: 10%;
+        --blob-2x: 16%;
+        --blob-2y: 24%;
+        --blob-3x: 6%;
+        --blob-3y: 28%;
+        --blob-4x: 22%;
+        --blob-4y: 13%;
+        --blob-5x: 29%;
+        --blob-5y: 6%;
+        --bubble-one-x: 44%;
+        --bubble-one-y: 42%;
+        --bubble-two-x: 58%;
+        --bubble-two-y: 55%;
+        --wave-motion: 0;
+        --shine-one-opacity: 0.28;
+        --shine-two-opacity: 0.18;
+        --hero-progress: 0;
+        --max: 1180px;
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        overflow-x: hidden;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      body.menu-open .nav-link {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      body.is-cursor-ready,
+      body.is-cursor-ready a,
+      body.is-cursor-ready button,
+      body.is-cursor-ready input,
+      body.is-cursor-ready select {
+        cursor: none;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 2px solid var(--blue);
+        outline-offset: 4px;
+      }
+
+      .nav {
+        position: fixed;
+        top: 14px;
+        left: 14px;
+        right: 14px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        pointer-events: none;
+      }
+
+      .nav a,
+      .nav button {
+        pointer-events: auto;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .brand img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+      }
+
+      .brand-text {
+        display: grid;
+        font-size: 0.8rem;
+        font-weight: 900;
+        line-height: 0.92;
+        text-transform: uppercase;
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .nav-link,
+      .nav-menu {
+        border: 1px solid var(--ink);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--ink);
+        text-decoration: none;
+        backdrop-filter: blur(16px);
+        transition:
+          transform 180ms ease,
+          background 180ms ease,
+          color 180ms ease;
+      }
+
+      .nav-link {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        padding: 0 20px;
+        font-size: 0.82rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .nav-link:hover,
+      .nav-menu:hover {
+        background: var(--blue);
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      .nav-menu {
+        position: relative;
+        width: 50px;
+        height: 50px;
+      }
+
+      .nav-menu::before,
+      .nav-menu::after {
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        height: 2px;
+        background: currentColor;
+        content: "";
+      }
+
+      .nav-menu::before {
+        top: 19px;
+      }
+
+      .nav-menu::after {
+        bottom: 18px;
+      }
+
+      .nav-menu.is-open::before {
+        top: 24px;
+        transform: rotate(45deg);
+      }
+
+      .nav-menu.is-open::after {
+        bottom: 24px;
+        transform: rotate(-45deg);
+      }
+
+      .menu-panel {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+        gap: 52px;
+        align-items: center;
+        padding: 96px 52px 44px;
+        background:
+          radial-gradient(circle at 82% 16%, rgba(7, 60, 255, 0.12), transparent 28rem),
+          var(--paper);
+        clip-path: ellipse(0% 0% at calc(100% - 44px) 38px);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          clip-path 620ms cubic-bezier(0.7, 0, 0.2, 1),
+          opacity 220ms ease;
+      }
+
+      .menu-panel.is-open {
+        clip-path: ellipse(145% 120% at calc(100% - 44px) 38px);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .menu-gallery {
+        position: relative;
+        display: grid;
+        min-height: 560px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        align-self: stretch;
+      }
+
+      .menu-card {
+        position: relative;
+        min-height: 250px;
+        margin: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #f7f8f4;
+        filter: grayscale(1) saturate(0.55) contrast(0.92);
+        opacity: 0.5;
+        transform: translateY(14px);
+        transition:
+          filter 260ms ease,
+          opacity 260ms ease,
+          transform 260ms ease,
+          box-shadow 260ms ease,
+          border-color 260ms ease;
+      }
+
+      .menu-panel.is-open .menu-card {
+        transform: translateY(0);
+      }
+
+      .menu-panel.is-open .menu-card:nth-child(2) {
+        transition-delay: 50ms;
+      }
+
+      .menu-panel.is-open .menu-card:nth-child(3) {
+        transition-delay: 100ms;
+      }
+
+      .menu-panel.is-open .menu-card:nth-child(4) {
+        transition-delay: 150ms;
+      }
+
+      .menu-card img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .menu-card.is-logo img {
+        object-fit: contain;
+        padding: 58px;
+      }
+
+      .menu-card::after {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, transparent 45%, rgba(17, 19, 15, 0.46)),
+          radial-gradient(circle at 26% 18%, rgba(255, 255, 255, 0.46), transparent 28%);
+        content: "";
+      }
+
+      .menu-card figcaption {
+        position: absolute;
+        left: 18px;
+        bottom: 16px;
+        z-index: 1;
+        color: #fff;
+        font-size: 0.82rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .menu-panel[data-active-menu="inicio"] .menu-card[data-menu-card="inicio"],
+      .menu-panel[data-active-menu="proceso"] .menu-card[data-menu-card="proceso"],
+      .menu-panel[data-active-menu="diagnostico"] .menu-card[data-menu-card="diagnostico"],
+      .menu-panel[data-active-menu="servicios"] .menu-card[data-menu-card="servicios"] {
+        border-color: rgba(7, 60, 255, 0.48);
+        box-shadow: 0 28px 72px rgba(7, 60, 255, 0.2);
+        filter: grayscale(0) saturate(1.18) contrast(1);
+        opacity: 1;
+      }
+
+      .menu-copy {
+        width: min(100%, 560px);
+        justify-self: center;
+      }
+
+      .menu-links {
+        display: grid;
+        gap: 4px;
+      }
+
+      .menu-link {
+        position: relative;
+        overflow: hidden;
+        color: var(--ink);
+        font-size: 4.5rem;
+        font-weight: 900;
+        line-height: 0.88;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .menu-link::after {
+        position: absolute;
+        left: 0;
+        bottom: 0.04em;
+        width: 0;
+        height: 0.08em;
+        border-radius: 999px;
+        background: var(--blue);
+        content: "";
+        transition: width 220ms ease;
+      }
+
+      .menu-link:hover::after {
+        width: 100%;
+      }
+
+      .menu-contact {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-top: 26px;
+      }
+
+      .menu-contact a {
+        color: var(--muted);
+        font-size: 0.86rem;
+        text-decoration: none;
+      }
+
+      .cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 180;
+        width: 54px;
+        height: 44px;
+        border: 1px solid rgba(7, 60, 255, 0.58);
+        border-radius: 43% 57% 52% 48% / 46% 41% 59% 54%;
+        background:
+          radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.7), transparent 22%),
+          rgba(7, 60, 255, 0.045);
+        box-shadow:
+          inset 0 0 18px rgba(255, 255, 255, 0.44),
+          0 10px 28px rgba(7, 60, 255, 0.08);
+        mix-blend-mode: multiply;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0);
+        transition:
+          opacity 160ms ease,
+          border-color 160ms ease,
+          width 160ms ease,
+          height 160ms ease;
+        animation: cursorBubble 6s ease-in-out infinite alternate;
+      }
+
+      .cursor::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--blue);
+        content: "";
+        transform: translate(-50%, -50%);
+      }
+
+      body.is-cursor-ready .cursor {
+        opacity: 1;
+      }
+
+      body.is-hovering .cursor {
+        width: 68px;
+        height: 54px;
+        border-color: var(--ink);
+      }
+
+      .section {
+        position: relative;
+        min-height: 100svh;
+        isolation: isolate;
+      }
+
+      .section::before,
+      .section::after {
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        height: 300px;
+        pointer-events: none;
+        content: "";
+      }
+
+      .section-inner {
+        position: relative;
+        z-index: 1;
+        width: min(100% - 32px, var(--max));
+        margin: 0 auto;
+      }
+
+      .hero {
+        display: grid;
+        min-height: 100svh;
+        align-items: center;
+        overflow: hidden;
+        background: var(--paper);
+      }
+
+      .hero::after {
+        bottom: -1px;
+        z-index: 0;
+        height: 360px;
+        background: linear-gradient(180deg, transparent, rgba(246, 246, 241, 0.68) 62%, var(--bg));
+      }
+
+      .topo {
+        position: absolute;
+        inset: -10%;
+        z-index: -4;
+        color: rgba(17, 19, 15, 0.13);
+        opacity: 0.78;
+        transform:
+          translate3d(calc(var(--mx) * -22px), calc(var(--my) * -18px), 0)
+          scale(calc(1 + var(--hero-progress) * 0.05));
+      }
+
+      .topo svg {
+        width: 120%;
+        height: 120%;
+      }
+
+      .hero-grid {
+        position: relative;
+        display: grid;
+        min-height: 100svh;
+        align-items: center;
+        padding: 86px 0 32px;
+      }
+
+      .hero-title {
+        position: absolute;
+        left: 0;
+        bottom: 34px;
+        z-index: 8;
+        max-width: 430px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 12px;
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 34px;
+        height: 1px;
+        background: var(--blue);
+        content: "";
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        margin-bottom: 14px;
+        font-size: 3.5rem;
+        font-weight: 900;
+        line-height: 0.92;
+        text-transform: uppercase;
+      }
+
+      .hero-title p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.55;
+      }
+
+      .hero-stage {
+        position: relative;
+        display: grid;
+        width: min(82svh, 690px);
+        height: min(82svh, 690px);
+        place-items: center;
+        justify-self: end;
+        margin-right: 64px;
+        transform:
+          translate3d(0, calc(var(--hero-progress) * 84px), 0)
+          scale(calc(1 - var(--hero-progress) * 0.04));
+        opacity: 0;
+        clip-path: ellipse(0% 0% at 50% 50%);
+        transition:
+          opacity 900ms ease,
+          clip-path 1100ms cubic-bezier(0.2, 0.8, 0.2, 1),
+          transform 180ms ease-out;
+      }
+
+      body.is-ready .hero-stage {
+        opacity: 1;
+        clip-path: ellipse(100% 100% at 50% 50%);
+      }
+
+      .brand-cap {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        z-index: 15;
+        display: none;
+        justify-items: center;
+        gap: 8px;
+        color: var(--ink);
+        font-size: 0.66rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        transform: translateX(-50%);
+      }
+
+      .brand-cap img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+      }
+
+      .butterfly-glow,
+      .butterfly-base,
+      .butterfly-wire,
+      .butterfly-lens {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        pointer-events: none;
+      }
+
+      .butterfly-glow {
+        opacity: 0.18;
+        filter: blur(26px);
+        transform:
+          translate3d(calc(var(--mx) * -36px), calc(var(--my) * -20px), 0)
+          scale(1.08);
+      }
+
+      .butterfly-base {
+        z-index: 3;
+        filter: drop-shadow(0 32px 34px rgba(7, 60, 255, 0.16));
+        transform:
+          translate3d(calc(var(--mx) * -18px), calc(var(--my) * -14px), 0)
+          rotate(calc(var(--mx) * -2deg));
+      }
+
+      .butterfly-wire {
+        z-index: 1;
+        opacity: 0.13;
+        filter: grayscale(1) brightness(0);
+        transform:
+          translate3d(calc(var(--mx) * 42px), calc(var(--my) * 36px), 0)
+          scale(1.16)
+          rotate(calc(var(--mx) * 4deg));
+      }
+
+      .butterfly-lens {
+        z-index: 4;
+        overflow: hidden;
+        background:
+          url("assets/yawtik-distorted-full.jpg") center / cover no-repeat,
+          var(--blue-soft);
+        background-position:
+          calc(50% + var(--mx) * 4rem) calc(50% + var(--my) * 3rem),
+          center;
+        clip-path: circle(0% at var(--lens-x) var(--lens-y));
+        mask-image: url("assets/yawtik-butterfly-blue.png");
+        mask-position: center;
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        -webkit-mask-image: url("assets/yawtik-butterfly-blue.png");
+        -webkit-mask-position: center;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        opacity: 0;
+        transform:
+          translate3d(calc(var(--mx) * 24px), calc(var(--my) * 18px), 0)
+          scale(1.02);
+        will-change: clip-path, transform, background-position;
+        transition: opacity 180ms ease;
+      }
+
+      .hero-stage.is-active .butterfly-lens {
+        opacity: 0.98;
+      }
+
+      .butterfly-lens::before,
+      .butterfly-lens::after {
+        position: absolute;
+        content: "";
+        pointer-events: none;
+      }
+
+      .butterfly-lens::before {
+        left: calc(var(--bubble-one-x) - 12%);
+        top: calc(var(--bubble-one-y) - 11%);
+        width: 24%;
+        height: 22%;
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        border-radius: 42% 58% 61% 39% / 46% 43% 57% 54%;
+        background:
+          radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.6), transparent 18%),
+          radial-gradient(circle at 76% 70%, rgba(7, 60, 255, 0.22), transparent 24%);
+        filter: blur(0.2px);
+        mix-blend-mode: screen;
+        opacity: var(--shine-one-opacity);
+        transform:
+          translate3d(calc(var(--mx) * -18px), calc(var(--my) * -12px), 0)
+          rotate(calc(var(--mx) * 10deg));
+      }
+
+      .butterfly-lens::after {
+        left: calc(var(--bubble-two-x) - 15%);
+        top: calc(var(--bubble-two-y) - 13%);
+        width: 30%;
+        height: 26%;
+        border-radius: 56% 44% 38% 62% / 58% 36% 64% 42%;
+        background:
+          radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.66), transparent 16%),
+          radial-gradient(circle at 66% 56%, rgba(255, 255, 255, 0.18), transparent 32%);
+        opacity: var(--shine-two-opacity);
+        mix-blend-mode: overlay;
+        transform:
+          translate3d(calc(var(--mx) * 12px), calc(var(--my) * 16px), 0)
+          rotate(calc(var(--my) * -8deg));
+      }
+
+      @keyframes cursorBubble {
+        from {
+          border-radius: 43% 57% 52% 48% / 46% 41% 59% 54%;
+        }
+        to {
+          border-radius: 57% 43% 44% 56% / 42% 56% 44% 58%;
+        }
+      }
+
+      .hero-wordmark {
+        position: absolute;
+        right: 0;
+        bottom: 36px;
+        z-index: 8;
+        display: grid;
+        justify-items: end;
+        gap: 10px;
+        color: var(--ink);
+        font-size: 0.75rem;
+        font-weight: 900;
+        text-align: right;
+        text-transform: uppercase;
+      }
+
+      .hero-wordmark img {
+        width: 170px;
+        filter: brightness(0);
+      }
+
+      .side-card {
+        position: absolute;
+        left: 0;
+        top: 170px;
+        z-index: 9;
+        width: 92px;
+        border: 1px solid var(--ink);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.56);
+        padding: 12px 10px;
+        backdrop-filter: blur(14px);
+      }
+
+      .side-card small,
+      .side-card strong,
+      .side-card span {
+        display: block;
+      }
+
+      .side-card small {
+        margin-bottom: 16px;
+        font-size: 0.56rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .side-card strong {
+        margin-bottom: 16px;
+        font-size: 0.74rem;
+        line-height: 1.05;
+        text-transform: uppercase;
+      }
+
+      .side-card span {
+        color: var(--muted);
+        font-size: 0.62rem;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .scroll-pin {
+        position: fixed;
+        right: 0;
+        top: 15%;
+        z-index: 90;
+        width: 6px;
+        height: 78px;
+        border-radius: 999px 0 0 999px;
+        background: rgba(17, 19, 15, 0.16);
+        overflow: hidden;
+      }
+
+      .scroll-pin span {
+        display: block;
+        width: 100%;
+        height: 22%;
+        border-radius: inherit;
+        background: var(--blue);
+        transform: translateY(calc(var(--page-progress, 0) * 56px));
+      }
+
+      .marquee-section {
+        display: grid;
+        min-height: 92svh;
+        align-items: center;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, var(--bg) 0%, rgba(246, 246, 241, 0) 18%, rgba(255, 255, 255, 0) 76%, rgba(255, 255, 255, 0.92) 100%),
+          radial-gradient(circle at 18% 26%, rgba(7, 60, 255, 0.06), transparent 22rem),
+          var(--bg);
+      }
+
+      .marquee-section::before {
+        inset: 0;
+        z-index: 0;
+        height: auto;
+        background:
+          linear-gradient(180deg, rgba(246, 246, 241, 0.92), transparent 20%, transparent 72%, rgba(255, 255, 255, 0.92)),
+          url("assets/yawtik-distorted-full.jpg") center / cover no-repeat;
+        filter: grayscale(1) contrast(1.1);
+        mix-blend-mode: multiply;
+        opacity: 0.065;
+      }
+
+      .marquee-section::after {
+        bottom: -1px;
+        z-index: 0;
+        height: 340px;
+        background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.74) 52%, var(--paper));
+      }
+
+      .marquee-lines {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+      }
+
+      .marquee-line {
+        display: flex;
+        width: max-content;
+        color: var(--ink);
+        font-size: 4.4rem;
+        font-weight: 900;
+        line-height: 0.98;
+        text-transform: uppercase;
+        white-space: nowrap;
+        will-change: transform;
+      }
+
+      .marquee-line span {
+        display: inline-block;
+        padding-right: 34px;
+      }
+
+      .marquee-line.is-blue {
+        color: var(--blue);
+        transform: translateX(calc(var(--marquee-shift, 0px) * -1));
+      }
+
+      .marquee-line.is-ink {
+        transform: translateX(var(--marquee-shift, 0px));
+      }
+
+      .process {
+        padding: 108px 0;
+        background:
+          linear-gradient(180deg, var(--paper), #fff 46%, rgba(246, 246, 241, 0.64) 100%),
+          var(--paper);
+      }
+
+      .process::before {
+        top: -180px;
+        z-index: 0;
+        height: 360px;
+        background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.86) 52%, var(--paper));
+      }
+
+      .process::after {
+        bottom: -180px;
+        z-index: 0;
+        height: 360px;
+        background: linear-gradient(180deg, rgba(246, 246, 241, 0), var(--bg) 54%, transparent);
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 54px;
+        align-items: start;
+      }
+
+      .section-kicker {
+        margin-bottom: 20px;
+        color: var(--muted);
+        font-size: 0.74rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .display {
+        margin-bottom: 22px;
+        font-size: 3.8rem;
+        font-weight: 900;
+        line-height: 0.96;
+        text-transform: uppercase;
+      }
+
+      .display .blue {
+        color: var(--blue);
+      }
+
+      .lead {
+        max-width: 560px;
+        color: var(--muted);
+        font-size: 1.06rem;
+        line-height: 1.68;
+      }
+
+      .steps {
+        display: grid;
+        gap: 12px;
+      }
+
+      .step {
+        position: relative;
+        display: grid;
+        grid-template-columns: 58px 1fr;
+        gap: 18px;
+        align-items: start;
+        border-top: 1px solid var(--line);
+        padding: 24px 0;
+        opacity: 0;
+        transform: translateY(28px);
+        clip-path: inset(0 100% 0 0);
+        transition:
+          opacity 620ms ease,
+          transform 620ms ease,
+          clip-path 760ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      .step.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        clip-path: inset(0 0 0 0);
+      }
+
+      .step-number {
+        color: var(--blue);
+        font-size: 0.85rem;
+        font-weight: 900;
+      }
+
+      .step h3 {
+        margin-bottom: 8px;
+        font-size: 1.25rem;
+        line-height: 1.15;
+        text-transform: uppercase;
+      }
+
+      .step p {
+        margin-bottom: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .diagnostic {
+        padding: 110px 0;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(7, 60, 255, 0.05) 28%, rgba(246, 246, 241, 0.96) 76%, rgba(255, 255, 255, 0.8)),
+          var(--bg);
+      }
+
+      .diagnostic::before {
+        top: -180px;
+        z-index: 0;
+        height: 360px;
+        background: linear-gradient(180deg, transparent, rgba(246, 246, 241, 0.9) 60%, var(--bg));
+      }
+
+      .diagnostic::after {
+        bottom: -180px;
+        z-index: 0;
+        height: 360px;
+        background: linear-gradient(180deg, rgba(246, 246, 241, 0), rgba(255, 255, 255, 0.88) 58%, var(--paper));
+      }
+
+      .form-shell {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 36px;
+        align-items: start;
+      }
+
+      .form-card {
+        border: 1px solid var(--ink);
+        border-radius: 8px;
+        background: var(--paper);
+        padding: 24px;
+        box-shadow: 10px 10px 0 var(--blue);
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .field {
+        display: grid;
+        gap: 7px;
+      }
+
+      .field span {
+        color: var(--muted);
+        font-size: 0.74rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fbfbf7;
+        color: var(--ink);
+        padding: 13px 14px;
+        outline: 0;
+        transition:
+          border-color 180ms ease,
+          box-shadow 180ms ease,
+          background 180ms ease;
+      }
+
+      .field textarea {
+        min-height: 96px;
+        resize: vertical;
+      }
+
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
+        border-color: var(--blue);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(7, 60, 255, 0.12);
+      }
+
+      .submit-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 50px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--ink);
+        border-radius: 8px;
+        background: var(--ink);
+        color: #fff;
+        padding: 0 20px;
+        font-size: 0.82rem;
+        font-weight: 900;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition:
+          transform 180ms ease,
+          background 180ms ease,
+          color 180ms ease;
+      }
+
+      .button:hover {
+        background: var(--blue);
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      .button-secondary {
+        background: #fff;
+        color: var(--blue);
+        border-color: var(--blue);
+      }
+
+      .button-secondary:hover {
+        background: var(--blue);
+        color: #fff;
+      }
+
+      .form-status {
+        min-height: 20px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .services {
+        padding: 110px 0 60px;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0) 22%),
+          linear-gradient(0deg, rgba(7, 60, 255, 0.08), transparent 22rem),
+          var(--paper);
+      }
+
+      .services::before {
+        top: -180px;
+        z-index: 0;
+        height: 360px;
+        background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.9) 58%, var(--paper));
+      }
+
+      .services::after {
+        bottom: -1px;
+        z-index: 0;
+        height: 240px;
+        background: linear-gradient(0deg, rgba(7, 60, 255, 0.16), transparent);
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 42px;
+      }
+
+      .service-card {
+        min-height: 210px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background:
+          linear-gradient(180deg, rgba(7, 60, 255, 0.06), transparent 38%),
+          #fbfbf7;
+        padding: 22px;
+        opacity: 0;
+        transform: translateY(34px);
+        transition:
+          opacity 520ms ease,
+          transform 520ms ease,
+          border-color 200ms ease,
+          box-shadow 200ms ease;
+      }
+
+      .service-card.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .service-card:hover {
+        border-color: var(--blue);
+        box-shadow: 6px 6px 0 var(--blue-soft);
+      }
+
+      .service-card small {
+        display: block;
+        margin-bottom: 44px;
+        color: var(--blue);
+        font-weight: 900;
+      }
+
+      .service-card h3 {
+        margin-bottom: 10px;
+        font-size: 1.04rem;
+        line-height: 1.12;
+        text-transform: uppercase;
+      }
+
+      .service-card p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.45;
+      }
+
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 70px;
+        border-top: 1px solid var(--line);
+        padding-top: 26px;
+      }
+
+      .footer img {
+        width: 118px;
+        filter: brightness(0) saturate(100%) invert(22%) sepia(99%) saturate(5000%) hue-rotate(231deg) brightness(92%) contrast(112%);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .footer-links a {
+        color: var(--muted);
+        font-size: 0.86rem;
+        text-decoration: none;
+        transition: color 160ms ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--blue);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 620ms ease,
+          transform 620ms ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1020px) {
+        h1 {
+          font-size: 2.85rem;
+        }
+
+        .menu-panel {
+          grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+          gap: 28px;
+          padding: 92px 28px 34px;
+        }
+
+        .menu-gallery {
+          min-height: 480px;
+          gap: 12px;
+        }
+
+        .menu-card {
+          min-height: 210px;
+        }
+
+        .menu-link {
+          font-size: 3.65rem;
+        }
+
+        .hero-stage {
+          width: min(70svh, 560px);
+          height: min(70svh, 560px);
+          justify-self: end;
+          margin-right: 20px;
+        }
+
+        .hero-title {
+          max-width: 360px;
+        }
+
+        .split,
+        .form-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .services-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 720px) {
+        .nav {
+          top: 10px;
+          left: 10px;
+          right: 10px;
+        }
+
+        .brand-text,
+        .nav-link {
+          display: none;
+        }
+
+        .nav-menu {
+          width: 46px;
+          height: 46px;
+        }
+
+        .menu-panel {
+          grid-template-columns: 1fr;
+          align-content: end;
+          gap: 24px;
+          padding: 88px 16px 28px;
+        }
+
+        .menu-gallery {
+          min-height: auto;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+          order: 2;
+        }
+
+        .menu-card {
+          min-height: 132px;
+        }
+
+        .menu-card.is-logo img {
+          padding: 30px;
+        }
+
+        .menu-copy {
+          width: 100%;
+        }
+
+        .menu-link {
+          font-size: 2.85rem;
+        }
+
+        .hero-grid {
+          min-height: 100svh;
+          padding-top: 78px;
+        }
+
+        .hero-stage {
+          width: min(88vw, 430px);
+          height: min(88vw, 430px);
+          align-self: start;
+          justify-self: center;
+          margin-right: 0;
+          margin-top: 46px;
+        }
+
+        .hero-title,
+        .hero-wordmark,
+        .side-card {
+          position: relative;
+          left: auto;
+          right: auto;
+          top: auto;
+          bottom: auto;
+        }
+
+        .hero-title {
+          max-width: 100%;
+          order: 2;
+          margin-top: 12px;
+        }
+
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-wordmark {
+          display: none;
+        }
+
+        .side-card {
+          display: none;
+        }
+
+        .brand-cap {
+          display: grid;
+          top: -28px;
+        }
+
+        .marquee-line {
+          font-size: clamp(2.2rem, 13vw, 3.2rem);
+          line-height: 0.95;
+        }
+
+        .marquee-section {
+          min-height: 54svh;
+        }
+
+        .marquee-lines {
+          transform: translateY(-4svh);
+        }
+
+        .process,
+        .diagnostic,
+        .services {
+          padding-top: 82px;
+          padding-bottom: 82px;
+        }
+
+        .display {
+          font-size: 2.45rem;
+        }
+
+        .step {
+          grid-template-columns: 40px 1fr;
+        }
+
+        .form-card {
+          padding: 18px;
+          box-shadow: 6px 6px 0 var(--blue);
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .footer-links {
+          justify-content: flex-start;
+        }
+
+        .cursor {
+          display: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.1ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.1ms !important;
+        }
+
+        .cursor {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor" aria-hidden="true"></div>
+    <div class="scroll-pin" aria-hidden="true"><span></span></div>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio">
+        <img src="assets/yawtik-butterfly-blue.png" alt="Mariposa Yawtik" loading="eager" decoding="async">
+        <span class="brand-text">Yawtik<br>Studio</span>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-link" href="#diagnostico">Diagnóstico</a>
+        <button class="nav-menu" id="menuButton" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menuPanel"></button>
+      </div>
+    </nav>
+
+    <aside class="menu-panel" id="menuPanel" aria-hidden="true" data-active-menu="inicio">
+      <div class="menu-gallery" aria-hidden="true">
+        <figure class="menu-card is-logo" data-menu-card="inicio">
+          <img src="assets/yawtik-butterfly-blue.png" alt="" loading="lazy" decoding="async">
+          <figcaption>Inicio</figcaption>
+        </figure>
+        <figure class="menu-card" data-menu-card="proceso">
+          <img src="assets/menu-proceso.svg" alt="" loading="lazy" decoding="async">
+          <figcaption>Proceso</figcaption>
+        </figure>
+        <figure class="menu-card" data-menu-card="diagnostico">
+          <img src="assets/menu-diagnostico.svg" alt="" loading="lazy" decoding="async">
+          <figcaption>Diagnóstico</figcaption>
+        </figure>
+        <figure class="menu-card" data-menu-card="servicios">
+          <img src="assets/menu-servicios.svg" alt="" loading="lazy" decoding="async">
+          <figcaption>Servicios</figcaption>
+        </figure>
+      </div>
+      <div class="menu-copy">
+        <div class="menu-links" aria-label="Menú principal">
+          <a class="menu-link" href="#inicio" data-menu-key="inicio">Inicio</a>
+          <a class="menu-link" href="#proceso" data-menu-key="proceso">Proceso</a>
+          <a class="menu-link" href="#diagnostico" data-menu-key="diagnostico">Diagnóstico</a>
+          <a class="menu-link" href="#servicios" data-menu-key="servicios">Servicios</a>
+        </div>
+        <div class="menu-contact">
+          <a href="mailto:yawtikccworkteam@gmail.com">yawtikccworkteam@gmail.com</a>
+          <a href="tel:+523411261561">+52 341 126 1561</a>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <section class="section hero" id="inicio" aria-labelledby="heroTitle">
+        <div class="topo" aria-hidden="true">
+          <svg viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+            <path d="M-30 86c162-68 324 28 424 145 126 148 318 143 496 49 153-81 329-134 568-62" stroke="currentColor" stroke-width="2"/>
+            <path d="M-80 260c174-97 287 26 390 132 147 151 318 101 485 14 201-104 379-42 720 11" stroke="currentColor" stroke-width="2"/>
+            <path d="M-80 575c228-170 364-34 494 69 154 122 262-55 431-115 207-74 402 34 657 38" stroke="currentColor" stroke-width="2"/>
+            <path d="M84 770c166-48 268-23 361 58 117 102 270 82 414-4 211-127 374-58 520 20" stroke="currentColor" stroke-width="2"/>
+            <path d="M306-70c-46 104-34 222 43 289 92 80 253 62 314 178 59 112-36 264 83 365 109 92 285 29 371 124" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M971-98c-31 113 46 199 154 258 120 66 208 137 188 282-19 139-184 171-229 295-36 100 19 182 101 251" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M28 36c57 60 77 119 57 177-27 78-134 84-151 172-15 78 47 132 112 176 86 58 118 123 77 217" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M1275 12c-69 72-89 147-31 215 72 84 224 72 258 190 34 116-104 174-116 294-9 93 64 147 145 188" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+        </div>
+
+        <div class="section-inner hero-grid">
+          <div class="hero-stage" aria-hidden="true">
+            <div class="brand-cap">
+              <img src="assets/yawtik-butterfly-blue.png" alt="" loading="eager" decoding="async">
+              <span>GROWTH ESTRATÉGICO</span>
+            </div>
+            <img class="butterfly-glow" src="assets/yawtik-butterfly-blue.png" alt="" loading="eager" decoding="async">
+            <img class="butterfly-wire" src="assets/yawtik-butterfly-blue.png" alt="" loading="eager" decoding="async">
+            <img class="butterfly-base" src="assets/yawtik-butterfly-blue.png" alt="" loading="eager" decoding="async">
+            <div class="butterfly-lens"></div>
+          </div>
+
+          <div class="side-card" aria-label="Resumen">
+            <small>Sistema</small>
+            <strong>Ventas digitales</strong>
+            <span>CRM<br>Ads<br>Contenido<br>Web</span>
+          </div>
+
+          <div class="hero-title reveal">
+            <p class="eyebrow">Yawtik Studio</p>
+            <h1 id="heroTitle">Tu canal digital debe vender.</h1>
+            <p>
+              Diseñamos presencia, contenido, pauta y seguimiento para que tu empresa
+              deje de improvisar y opere un sistema real de ventas.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="section marquee-section" aria-label="Mensaje de marca">
+        <div class="marquee-lines" aria-hidden="true">
+          <div class="marquee-line is-blue">
+            <span>growth para ventas</span><span>growth para ventas</span><span>growth para ventas</span>
+          </div>
+          <div class="marquee-line is-ink">
+            <span>sin depender de suerte</span><span>sin depender de suerte</span><span>sin depender de suerte</span>
+          </div>
+          <div class="marquee-line is-blue">
+            <span>presencia que cierra</span><span>presencia que cierra</span><span>presencia que cierra</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section process" id="proceso">
+        <div class="section-inner split">
+          <div class="reveal">
+            <p class="section-kicker">Proceso integral</p>
+            <h2 class="display">La página no es el final. Es el <span class="blue">inicio</span> del sistema.</h2>
+            <p class="lead">
+              La animación atrae atención; el embudo la convierte en ventas. Por eso conectamos web,
+              CRM, pauta, contenido y seguimiento en un solo flujo.
+            </p>
+          </div>
+
+          <div class="steps">
+            <article class="step">
+              <span class="step-number">01</span>
+              <div>
+                <h3>Diagnóstico de demanda</h3>
+                <p>Detectamos dónde se escapa la oportunidad: tráfico, mensaje, oferta, seguimiento o cierre.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-number">02</span>
+              <div>
+                <h3>Arquitectura del embudo</h3>
+                <p>Definimos el recorrido completo: anuncio, landing, formulario, CRM, automatización y venta.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-number">03</span>
+              <div>
+                <h3>Contenido con dirección</h3>
+                <p>Convertimos la autoridad del negocio en piezas que educan, filtran y preparan prospectos.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-number">04</span>
+              <div>
+                <h3>Optimización continua</h3>
+                <p>Medimos costo, calidad, velocidad de respuesta y cierre para escalar con control.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section diagnostic" id="diagnostico">
+        <div class="section-inner form-shell">
+          <div class="reveal">
+            <p class="section-kicker">Diagnóstico</p>
+            <h2 class="display">Cuéntanos dónde está atorado el <span class="blue">crecimiento</span>.</h2>
+            <p class="lead">
+              Al enviar, se prepara un correo para Yawtik con tu información completa. Un estratega puede
+              revisar el perfil y responder con el siguiente paso.
+            </p>
+          </div>
+
+          <form class="form-card reveal" id="diagnosticForm">
+            <div class="form-grid">
+              <label class="field">
+                <span>Nombre</span>
+                <input name="Nombre" autocomplete="name" required>
+              </label>
+              <label class="field">
+                <span>Empresa</span>
+                <input name="Empresa" autocomplete="organization" required>
+              </label>
+              <label class="field">
+                <span>Giro de la empresa</span>
+                <input name="Giro de la empresa" placeholder="Ej. inmobiliaria, clínica, consultoría..." required>
+              </label>
+              <label class="field">
+                <span>Email</span>
+                <input name="Email" type="email" autocomplete="email" required>
+              </label>
+              <label class="field">
+                <span>Teléfono</span>
+                <input name="Telefono" type="tel" autocomplete="tel">
+              </label>
+              <label class="field">
+                <span>Facturación mensual</span>
+                <select name="Facturacion mensual" required>
+                  <option value="">Selecciona una opción</option>
+                  <option>Menos de $50,000 MXN</option>
+                  <option>$50,000 - $200,000 MXN</option>
+                  <option>$200,000 - $1,000,000 MXN</option>
+                  <option>Más de $1,000,000 MXN</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Principal desafío</span>
+                <select name="Principal desafio" required>
+                  <option value="">Selecciona una opción</option>
+                  <option>No genero suficientes prospectos</option>
+                  <option>Genero prospectos pero no cierro ventas</option>
+                  <option>Mi ticket promedio es bajo</option>
+                  <option>No tengo un proceso de ventas definido</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Canales actuales</span>
+                <select name="Canales actuales" required>
+                  <option value="">Selecciona una opción</option>
+                  <option>Solo redes sociales orgánicas</option>
+                  <option>Publicidad pagada Meta o Google</option>
+                  <option>Tengo página web y CRM</option>
+                  <option>Ninguno o presencia mínima</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Inversión mensual posible</span>
+                <select name="Inversion mensual posible" required>
+                  <option value="">Selecciona una opción</option>
+                  <option>Menos de $10,000 MXN</option>
+                  <option>$10,000 - $30,000 MXN</option>
+                  <option>$30,000 - $80,000 MXN</option>
+                  <option>Más de $80,000 MXN</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Contexto extra</span>
+                <textarea name="Contexto extra" placeholder="Qué vendes, ticket promedio, ciudad, qué has probado..."></textarea>
+              </label>
+              <label class="field">
+                <span>Mensaje prehecho</span>
+                <textarea name="Mensaje prehecho" id="prefillMessage">Estoy interesado en sus servicios. Me gustaría saber cómo Yawtik puede ayudar a mi empresa a generar más prospectos y cerrar ventas con un sistema digital.</textarea>
+              </label>
+            </div>
+            <div class="submit-row">
+              <button class="button" type="submit">Correo</button>
+              <a class="button button-secondary" id="whatsappButton" href="https://wa.me/523411261561?text=Estoy%20interesado%20en%20sus%20servicios." target="_blank" rel="noopener">WhatsApp</a>
+              <p class="form-status" id="formStatus" role="status"></p>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="section services" id="servicios">
+        <div class="section-inner">
+          <div class="reveal">
+            <p class="section-kicker">Servicios</p>
+            <h2 class="display">Todo lo que tu empresa necesita para <span class="blue">dominar</span> ventas digitales.</h2>
+          </div>
+
+          <div class="services-grid" aria-label="Servicios de Yawtik Studio">
+            <article class="service-card">
+              <small>01</small>
+              <h3>Desarrollo Web</h3>
+              <p>Sitios rápidos, claros y diseñados para convertir intención en contacto.</p>
+            </article>
+            <article class="service-card">
+              <small>02</small>
+              <h3>CRM & Automatización</h3>
+              <p>Pipeline, tareas, seguimiento y automatizaciones para no perder oportunidades.</p>
+            </article>
+            <article class="service-card">
+              <small>03</small>
+              <h3>Dirección de Contenido</h3>
+              <p>Autoridad y narrativa para que el mercado entienda por qué comprarte.</p>
+            </article>
+            <article class="service-card">
+              <small>04</small>
+              <h3>Producción Audiovisual</h3>
+              <p>Grabación y edición de piezas para web, ads y redes sociales.</p>
+            </article>
+            <article class="service-card">
+              <small>05</small>
+              <h3>Gestión de Campañas</h3>
+              <p>Estrategia, ejecución y lectura de campañas digitales integrales.</p>
+            </article>
+            <article class="service-card">
+              <small>06</small>
+              <h3>Meta & Google Ads</h3>
+              <p>Pauta pagada optimizada para crecer sin quemar presupuesto a ciegas.</p>
+            </article>
+            <article class="service-card">
+              <small>07</small>
+              <h3>Auditoría Digital</h3>
+              <p>Diagnóstico completo de presencia, activos, embudo y seguimiento comercial.</p>
+            </article>
+            <article class="service-card">
+              <small>08</small>
+              <h3>Proceso Integral de Ventas</h3>
+              <p>Del primer clic al cierre: diseño, medición y operación del sistema.</p>
+            </article>
+          </div>
+
+          <footer class="footer">
+            <img src="assets/yawtik-word-blue.png" alt="Yawtik" loading="lazy" decoding="async">
+            <div class="footer-links">
+              <a href="mailto:yawtikccworkteam@gmail.com">yawtikccworkteam@gmail.com</a>
+              <a href="tel:+523411261561">+52 341 126 1561</a>
+              <span>Yawtik © 2026</span>
+            </div>
+          </footer>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const body = document.body;
+        const cursor = document.querySelector(".cursor");
+        const heroStage = document.querySelector(".hero-stage");
+        const butterflyLens = document.querySelector(".butterfly-lens");
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+        window.requestAnimationFrame(() => body.classList.add("is-ready"));
+
+        const pointer = {
+          targetX: 0,
+          targetY: 0,
+          x: 0,
+          y: 0,
+          clientX: window.innerWidth / 2,
+          clientY: window.innerHeight / 2,
+          lastClientX: window.innerWidth / 2,
+          lastClientY: window.innerHeight / 2,
+          localX: 50,
+          localY: 50,
+          localTargetX: 50,
+          localTargetY: 50,
+          targetMotion: 0,
+          motion: 0,
+          wavePhase: 0,
+          directionAngle: 0,
+          overHero: false,
+        };
+
+        function clamp(value, min, max) {
+          return Math.min(max, Math.max(min, value));
+        }
+
+        function updateScroll() {
+          const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+          const pageProgress = clamp(window.scrollY / maxScroll, 0, 1);
+          const heroProgress = clamp(window.scrollY / window.innerHeight, 0, 1);
+          const marqueeShift = `${Math.round(window.scrollY * 0.38)}px`;
+
+          root.style.setProperty("--page-progress", pageProgress.toFixed(4));
+          root.style.setProperty("--hero-progress", heroProgress.toFixed(4));
+          root.style.setProperty("--marquee-shift", marqueeShift);
+        }
+
+        function updatePointer(event) {
+          pointer.clientX = event.clientX;
+          pointer.clientY = event.clientY;
+          pointer.targetX = ((event.clientX / window.innerWidth) - 0.5) * 2;
+          pointer.targetY = ((event.clientY / window.innerHeight) - 0.5) * 2;
+
+          const deltaX = event.clientX - pointer.lastClientX;
+          const deltaY = event.clientY - pointer.lastClientY;
+          const distance = Math.hypot(deltaX, deltaY);
+          pointer.lastClientX = event.clientX;
+          pointer.lastClientY = event.clientY;
+
+          if (distance > 0.2) {
+            pointer.directionAngle = Math.atan2(deltaY, deltaX);
+          }
+
+          if (!heroStage) return;
+          const rect = heroStage.getBoundingClientRect();
+          const insideHero =
+            event.clientX >= rect.left &&
+            event.clientX <= rect.right &&
+            event.clientY >= rect.top &&
+            event.clientY <= rect.bottom;
+
+          pointer.overHero = insideHero;
+          heroStage.classList.toggle("is-active", insideHero);
+
+          if (!insideHero) {
+            pointer.targetMotion = 0;
+            return;
+          }
+
+          pointer.localTargetX = clamp(((event.clientX - rect.left) / rect.width) * 100, 8, 92);
+          pointer.localTargetY = clamp(((event.clientY - rect.top) / rect.height) * 100, 8, 92);
+          pointer.targetMotion = Math.min(1, pointer.targetMotion + distance / 90);
+        }
+
+        function buildDropletClip(centerX, centerY, motion) {
+          const pointCount = 28;
+          const baseRadiusX = 13 + motion * 11;
+          const baseRadiusY = 12 + motion * 9;
+          const points = [];
+
+          for (let index = 0; index < pointCount; index += 1) {
+            const angle = (Math.PI * 2 * index) / pointCount;
+            const directionalPull = Math.max(0, Math.cos(angle - pointer.directionAngle)) * motion * 0.34;
+            const ripple =
+              Math.sin(angle * 2.2 + pointer.wavePhase) * motion * 0.1 +
+              Math.cos(angle * 3.4 - pointer.wavePhase * 0.7) * motion * 0.08;
+            const droplet = 1 + directionalPull + ripple;
+            const x = clamp(centerX + Math.cos(angle) * baseRadiusX * droplet, 0, 100);
+            const y = clamp(centerY + Math.sin(angle) * baseRadiusY * droplet, 0, 100);
+            points.push(`${x.toFixed(2)}% ${y.toFixed(2)}%`);
+          }
+
+          return `polygon(${points.join(", ")})`;
+        }
+
+        function animatePointer() {
+          pointer.x += (pointer.targetX - pointer.x) * 0.08;
+          pointer.y += (pointer.targetY - pointer.y) * 0.08;
+          pointer.localX += (pointer.localTargetX - pointer.localX) * 0.22;
+          pointer.localY += (pointer.localTargetY - pointer.localY) * 0.22;
+          pointer.targetMotion *= 0.82;
+          pointer.motion += ((pointer.overHero ? pointer.targetMotion : 0) - pointer.motion) * 0.18;
+          pointer.wavePhase += pointer.motion * 0.34;
+
+          const motion = clamp(pointer.motion, 0, 1);
+          const stillRadius = pointer.overHero ? 12 : 0;
+
+          root.style.setProperty("--mx", pointer.x.toFixed(4));
+          root.style.setProperty("--my", pointer.y.toFixed(4));
+          root.style.setProperty("--lens-x", `${pointer.localX.toFixed(2)}%`);
+          root.style.setProperty("--lens-y", `${pointer.localY.toFixed(2)}%`);
+          root.style.setProperty("--wave-motion", motion.toFixed(3));
+          root.style.setProperty("--shine-one-opacity", (0.18 + motion * 0.36).toFixed(3));
+          root.style.setProperty("--shine-two-opacity", (0.12 + motion * 0.34).toFixed(3));
+          root.style.setProperty("--bubble-one-x", `${(pointer.localX - 8 + motion * 4).toFixed(2)}%`);
+          root.style.setProperty("--bubble-one-y", `${(pointer.localY - 7).toFixed(2)}%`);
+          root.style.setProperty("--bubble-two-x", `${(pointer.localX + 10 - motion * 3).toFixed(2)}%`);
+          root.style.setProperty("--bubble-two-y", `${(pointer.localY + 9).toFixed(2)}%`);
+
+          if (butterflyLens) {
+            butterflyLens.style.clipPath = motion > 0.025
+              ? buildDropletClip(pointer.localX, pointer.localY, motion)
+              : `circle(${stillRadius}% at ${pointer.localX.toFixed(2)}% ${pointer.localY.toFixed(2)}%)`;
+            butterflyLens.style.opacity = pointer.overHero ? "0.98" : "0";
+            butterflyLens.style.filter = `drop-shadow(0 0 ${Math.round(10 + motion * 22)}px rgba(7, 60, 255, ${0.12 + motion * 0.16})) saturate(${(1.04 + motion * 0.26).toFixed(2)})`;
+          }
+
+          if (cursor) {
+            cursor.style.transform = `translate3d(${pointer.clientX}px, ${pointer.clientY}px, 0) translate(-50%, -50%)`;
+          }
+
+          window.requestAnimationFrame(animatePointer);
+        }
+
+        if (finePointer && !reducedMotion) {
+          body.classList.add("is-cursor-ready");
+          window.addEventListener("mousemove", updatePointer, { passive: true });
+          document.addEventListener("pointerover", (event) => {
+            body.classList.toggle("is-hovering", Boolean(event.target.closest("a, button, input, select, textarea")));
+          });
+          animatePointer();
+        }
+
+        let scrollQueued = false;
+        window.addEventListener("scroll", () => {
+          if (scrollQueued) return;
+          scrollQueued = true;
+          window.requestAnimationFrame(() => {
+            updateScroll();
+            checkReveals();
+            scrollQueued = false;
+          });
+        }, { passive: true });
+        updateScroll();
+
+        document.querySelectorAll("[data-scroll-target]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const target = document.getElementById(button.dataset.scrollTarget);
+            if (target) target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+          });
+        });
+
+        const menuButton = document.querySelector("#menuButton");
+        const menuPanel = document.querySelector("#menuPanel");
+        const menuLinks = menuPanel ? Array.from(menuPanel.querySelectorAll("[data-menu-key]")) : [];
+
+        function setMenu(open) {
+          if (!menuButton || !menuPanel) return;
+          body.classList.toggle("menu-open", open);
+          menuButton.classList.toggle("is-open", open);
+          menuPanel.classList.toggle("is-open", open);
+          menuButton.setAttribute("aria-expanded", String(open));
+          menuButton.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+          menuPanel.setAttribute("aria-hidden", String(!open));
+        }
+
+        if (menuButton && menuPanel) {
+          menuButton.addEventListener("click", () => setMenu(!menuPanel.classList.contains("is-open")));
+          menuLinks.forEach((link) => {
+            const activate = () => {
+              menuPanel.dataset.activeMenu = link.dataset.menuKey || "inicio";
+            };
+            link.addEventListener("mouseenter", activate);
+            link.addEventListener("mouseover", activate);
+            link.addEventListener("pointerover", activate);
+            link.addEventListener("focus", activate);
+            link.addEventListener("click", () => {
+              activate();
+              setMenu(false);
+            });
+          });
+          document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") setMenu(false);
+          });
+        }
+
+        const revealTargets = Array.from(document.querySelectorAll(".reveal, .step, .service-card"));
+
+        function checkReveals() {
+          revealTargets.forEach((element) => {
+            const rect = element.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+              element.classList.add("is-visible");
+            }
+          });
+        }
+
+        function revealHashSection() {
+          if (!window.location.hash) return;
+          const section = document.querySelector(window.location.hash);
+          if (!section) return;
+          section.querySelectorAll(".reveal, .step, .service-card").forEach((element) => {
+            element.classList.add("is-visible");
+          });
+        }
+
+        revealTargets.forEach((element, index) => {
+          element.style.transitionDelay = `${Math.min(index % 8, 7) * 70}ms`;
+        });
+        checkReveals();
+        revealHashSection();
+        window.addEventListener("load", () => {
+          checkReveals();
+          revealHashSection();
+        });
+        window.addEventListener("hashchange", () => window.setTimeout(() => {
+          checkReveals();
+          revealHashSection();
+        }, 80));
+        window.setTimeout(checkReveals, 120);
+        window.setTimeout(checkReveals, 520);
+
+        const form = document.querySelector("#diagnosticForm");
+        const status = document.querySelector("#formStatus");
+        const whatsappButton = document.querySelector("#whatsappButton");
+        const contactEmail = "yawtikccworkteam@gmail.com";
+        const whatsappPhone = "523411261561";
+
+        if (form) {
+          function buildContactLines() {
+            const data = new FormData(form);
+            return [
+              "Nuevo diagnóstico desde la landing de Yawtik Studio",
+              "",
+              ...Array.from(data.entries()).map(([key, value]) => `${key}: ${value || "Sin respuesta"}`),
+              "",
+              `Fecha: ${new Date().toLocaleString("es-MX")}`,
+            ];
+          }
+
+          function buildQuickMessage() {
+            const data = new FormData(form);
+            const message = data.get("Mensaje prehecho") || "Estoy interesado en sus servicios.";
+            const name = data.get("Nombre");
+            const company = data.get("Empresa");
+            const industry = data.get("Giro de la empresa");
+            const context = [
+              message,
+              name ? `Nombre: ${name}` : "",
+              company ? `Empresa: ${company}` : "",
+              industry ? `Giro: ${industry}` : "",
+            ].filter(Boolean);
+
+            return context.join("\n");
+          }
+
+          function updateContactActions() {
+            if (!whatsappButton) return;
+            const text = encodeURIComponent(buildQuickMessage());
+            whatsappButton.href = `https://wa.me/${whatsappPhone}?text=${text}`;
+          }
+
+          form.addEventListener("input", updateContactActions);
+          form.addEventListener("change", updateContactActions);
+          updateContactActions();
+
+          form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const lines = buildContactLines();
+            const subject = encodeURIComponent("Nuevo diagnóstico Yawtik Studio");
+            const bodyText = encodeURIComponent(lines.join("\n"));
+            status.textContent = "Abriendo correo con el diagnóstico listo...";
+            window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${bodyText}`;
+            window.setTimeout(() => {
+              status.textContent = `Si tu correo no abrió, escribe a ${contactEmail}.`;
+            }, 1600);
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

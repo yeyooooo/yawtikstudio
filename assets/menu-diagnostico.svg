@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-label="Diagnostico comercial">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f6f6f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="720" fill="url(#bg)"/>
+  <circle cx="742" cy="166" r="190" fill="#073cff" fill-opacity=".08"/>
+  <circle cx="236" cy="548" r="210" fill="#073cff" fill-opacity=".06"/>
+  <rect x="216" y="94" width="528" height="532" rx="28" fill="url(#panel)" stroke="#11130f" stroke-opacity=".18" stroke-width="5"/>
+  <rect x="282" y="168" width="268" height="28" rx="14" fill="#11130f" fill-opacity=".78"/>
+  <rect x="282" y="226" width="396" height="42" rx="12" fill="#fff" stroke="#d9dcd2" stroke-width="4"/>
+  <rect x="282" y="306" width="396" height="42" rx="12" fill="#fff" stroke="#d9dcd2" stroke-width="4"/>
+  <rect x="282" y="386" width="396" height="42" rx="12" fill="#fff" stroke="#d9dcd2" stroke-width="4"/>
+  <rect x="282" y="478" width="190" height="54" rx="14" fill="#073cff"/>
+  <path d="M611 186l34 34 70-86" fill="none" stroke="#073cff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#073cff" fill-opacity=".28">
+    <circle cx="176" cy="162" r="16"/>
+    <circle cx="796" cy="456" r="20"/>
+    <circle cx="164" cy="438" r="10"/>
+  </g>
+</svg>

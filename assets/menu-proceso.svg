@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-label="Proceso de crecimiento digital">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f9faf7"/>
+      <stop offset="1" stop-color="#dfe7ff"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#073cff"/>
+      <stop offset="1" stop-color="#6f8cff"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="720" fill="url(#bg)"/>
+  <path d="M-40 190C120 86 242 222 370 162c110-52 168-186 330-108 142 68 164 250 332 204" fill="none" stroke="#11130f" stroke-opacity=".12" stroke-width="7"/>
+  <path d="M44 562c128-142 254-78 344-150 118-94 116-288 290-268 126 14 168 136 258 114" fill="none" stroke="#073cff" stroke-opacity=".2" stroke-width="8"/>
+  <g fill="#fff" stroke="#11130f" stroke-opacity=".22" stroke-width="4">
+    <rect x="110" y="170" width="218" height="132" rx="16"/>
+    <rect x="374" y="294" width="218" height="132" rx="16"/>
+    <rect x="638" y="414" width="218" height="132" rx="16"/>
+  </g>
+  <g fill="url(#blue)">
+    <circle cx="166" cy="236" r="20"/>
+    <circle cx="430" cy="360" r="20"/>
+    <circle cx="694" cy="480" r="20"/>
+  </g>
+  <g fill="#11130f" fill-opacity=".72">
+    <rect x="204" y="214" width="82" height="14" rx="7"/>
+    <rect x="204" y="244" width="58" height="12" rx="6"/>
+    <rect x="468" y="338" width="82" height="14" rx="7"/>
+    <rect x="468" y="368" width="58" height="12" rx="6"/>
+    <rect x="732" y="458" width="82" height="14" rx="7"/>
+    <rect x="732" y="488" width="58" height="12" rx="6"/>
+  </g>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-label="Servicios digitales">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfbf7"/>
+      <stop offset="1" stop-color="#dfe7ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="720" fill="url(#bg)"/>
+  <path d="M120 138h720v444H120z" fill="#fff" stroke="#11130f" stroke-opacity=".16" stroke-width="5"/>
+  <path d="M120 206h720" stroke="#11130f" stroke-opacity=".16" stroke-width="5"/>
+  <circle cx="166" cy="172" r="14" fill="#073cff"/>
+  <circle cx="212" cy="172" r="14" fill="#11130f" fill-opacity=".45"/>
+  <circle cx="258" cy="172" r="14" fill="#11130f" fill-opacity=".2"/>
+  <g stroke="#073cff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M244 480V356"/>
+    <path d="M360 480V286"/>
+    <path d="M476 480V330"/>
+    <path d="M592 480V246"/>
+    <path d="M708 480V386"/>
+  </g>
+  <g fill="#11130f" fill-opacity=".72">
+    <rect x="244" y="246" width="112" height="20" rx="10"/>
+    <rect x="244" y="286" width="76" height="14" rx="7"/>
+    <rect x="592" y="246" width="128" height="20" rx="10"/>
+    <rect x="592" y="286" width="92" height="14" rx="7"/>
+  </g>
+  <path d="M208 532c174-116 280-64 390-108 96-38 142-96 212-78" fill="none" stroke="#073cff" stroke-opacity=".22" stroke-width="10"/>
+</svg>
