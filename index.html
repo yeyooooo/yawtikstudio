@@ -393,10 +393,10 @@
         top: 0;
         left: 0;
         z-index: 180;
-        width: 54px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
         border: 1px solid rgba(7, 60, 255, 0.58);
-        border-radius: 43% 57% 52% 48% / 46% 41% 59% 54%;
+        border-radius: 50%;
         background:
           radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.7), transparent 22%),
           rgba(7, 60, 255, 0.045);
@@ -412,7 +412,6 @@
           border-color 160ms ease,
           width 160ms ease,
           height 160ms ease;
-        animation: cursorBubble 6s ease-in-out infinite alternate;
       }
 
       .cursor::after {
@@ -432,8 +431,8 @@
       }
 
       body.is-hovering .cursor {
-        width: 68px;
-        height: 54px;
+        width: 64px;
+        height: 64px;
         border-color: var(--ink);
       }
 
@@ -700,15 +699,6 @@
         transform:
           translate3d(calc(var(--mx) * 12px), calc(var(--my) * 16px), 0)
           rotate(calc(var(--my) * -8deg));
-      }
-
-      @keyframes cursorBubble {
-        from {
-          border-radius: 43% 57% 52% 48% / 46% 41% 59% 54%;
-        }
-        to {
-          border-radius: 57% 43% 44% 56% / 42% 56% 44% 58%;
-        }
       }
 
       .hero-wordmark {
@@ -1649,8 +1639,8 @@
                 <textarea name="Contexto extra" placeholder="Qué vendes, ticket promedio, ciudad, qué has probado..."></textarea>
               </label>
               <label class="field">
-                <span>Mensaje prehecho</span>
-                <textarea name="Mensaje prehecho" id="prefillMessage">Estoy interesado en sus servicios. Me gustaría saber cómo Yawtik puede ayudar a mi empresa a generar más prospectos y cerrar ventas con un sistema digital.</textarea>
+                <span>Mensaje base</span>
+                <textarea name="Mensaje base" id="prefillMessage">Estoy interesado en sus servicios. Me gustaría saber cómo Yawtik puede ayudar a mi empresa a generar más prospectos y cerrar ventas con un sistema digital.</textarea>
               </label>
             </div>
             <div class="submit-row">
@@ -1973,47 +1963,94 @@
         const whatsappPhone = "523411261561";
 
         if (form) {
-          function buildContactLines() {
+          const fieldLabels = {
+            Nombre: "Nombre",
+            Empresa: "Empresa",
+            "Giro de la empresa": "Giro de la empresa",
+            Email: "Email",
+            Telefono: "Teléfono",
+            "Facturacion mensual": "Facturación mensual",
+            "Principal desafio": "Principal desafío",
+            "Canales actuales": "Canales actuales",
+            "Inversion mensual posible": "Inversión mensual posible",
+            "Contexto extra": "Contexto extra",
+          };
+
+          function getField(data, key) {
+            return String(data.get(key) || "").trim();
+          }
+
+          function answer(data, key) {
+            return getField(data, key) || "Sin respuesta";
+          }
+
+          function buildStructuredSummary() {
             const data = new FormData(form);
+            const intro = getField(data, "Mensaje base") || "Estoy interesado en sus servicios.";
+            const name = answer(data, "Nombre");
+            const company = answer(data, "Empresa");
+
+            return [
+              "Hola, Yawtik Studio.",
+              "",
+              intro,
+              "",
+              "Resumen del diagnóstico:",
+              `- Prospecto: ${name}`,
+              `- Empresa: ${company}`,
+              ...Object.keys(fieldLabels)
+                .filter((key) => key !== "Nombre" && key !== "Empresa")
+                .map((key) => `- ${fieldLabels[key]}: ${answer(data, key)}`),
+              "",
+              "Solicitud:",
+              "Me gustaría recibir una recomendación sobre el siguiente paso para mejorar mi sistema digital de ventas.",
+            ];
+          }
+
+          function buildQuickMessage() {
+            return buildDiagnosticMessage().join("\n");
+          }
+
+          function buildDiagnosticMessage() {
             return [
               "Nuevo diagnóstico desde la landing de Yawtik Studio",
               "",
-              ...Array.from(data.entries()).map(([key, value]) => `${key}: ${value || "Sin respuesta"}`),
+              ...buildStructuredSummary(),
               "",
               `Fecha: ${new Date().toLocaleString("es-MX")}`,
             ];
           }
 
-          function buildQuickMessage() {
-            const data = new FormData(form);
-            const message = data.get("Mensaje prehecho") || "Estoy interesado en sus servicios.";
-            const name = data.get("Nombre");
-            const company = data.get("Empresa");
-            const industry = data.get("Giro de la empresa");
-            const context = [
-              message,
-              name ? `Nombre: ${name}` : "",
-              company ? `Empresa: ${company}` : "",
-              industry ? `Giro: ${industry}` : "",
-            ].filter(Boolean);
-
-            return context.join("\n");
-          }
-
           function updateContactActions() {
-            if (!whatsappButton) return;
             const text = encodeURIComponent(buildQuickMessage());
-            whatsappButton.href = `https://wa.me/${whatsappPhone}?text=${text}`;
+            const href = `https://wa.me/${whatsappPhone}?text=${text}`;
+            if (whatsappButton) whatsappButton.href = href;
+            return href;
           }
 
           form.addEventListener("input", updateContactActions);
           form.addEventListener("change", updateContactActions);
           updateContactActions();
 
+          if (whatsappButton) {
+            whatsappButton.addEventListener("click", (event) => {
+              if (!form.reportValidity()) {
+                event.preventDefault();
+                status.textContent = "Completa los campos requeridos para preparar el WhatsApp.";
+                return;
+              }
+
+              updateContactActions();
+              status.textContent = "Abriendo WhatsApp con el diagnóstico listo...";
+            });
+          }
+
           form.addEventListener("submit", (event) => {
             event.preventDefault();
-            const lines = buildContactLines();
-            const subject = encodeURIComponent("Nuevo diagnóstico Yawtik Studio");
+            const data = new FormData(form);
+            const company = getField(data, "Empresa");
+            const lines = buildDiagnosticMessage();
+            const subject = encodeURIComponent(`Nuevo diagnóstico Yawtik Studio${company ? ` - ${company}` : ""}`);
             const bodyText = encodeURIComponent(lines.join("\n"));
             status.textContent = "Abriendo correo con el diagnóstico listo...";
             window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${bodyText}`;
